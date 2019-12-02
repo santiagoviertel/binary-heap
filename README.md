@@ -1,2 +1,12 @@
-# binary-heap
-The implementation of a binary heap with the max-heap property
+# Binary Heap
+
+The implementation of a binary heap with the __max-heap__ property.
+The class Heap inherits __std::vector__ and implements the three main operations of binary heaps: __top__, __push__ and __pop__.
+Template is used, providing the functionality for any class.
+In this context, the method __operator<__ must be overloaded.
+Furthermore, a __min-heap__ can be implemented through __operator<__ overloading.
+
+- __Platforms__: Linux and Windows __(not tested)__
+- __Used libraries__: STL
+- __Programming language__: C++
+- __Last code change__: 12/02/2019
