@@ -2,6 +2,33 @@
 
 template <typename T>
 class Heap : public std::vector<T> {
+	private:
+		void heapify(int i) {
+			int l = 2*i+1;
+			int r = 2*i+2,g;
+			T aux;
+			if(l<this->size()&&(*this)[i]<(*this)[l])
+				g = l;
+			else
+				g = i;
+			if(r<this->size()&&(*this)[g]<(*this)[r])
+				g = r;
+			while(g!=i) {
+				aux = (*this)[i];
+				(*this)[i] = (*this)[g];
+				(*this)[g] = aux;
+				i = g;
+				l = 2*g+1;
+				r = 2*g+2;
+				if(l<this->size()&&(*this)[i]<(*this)[l])
+					g = l;
+				else
+					g = i;
+				if(r<this->size()&&(*this)[g]<(*this)[r])
+					g = r;
+			}
+		}
+
 	public:
 		const T& top() {
 			return (*this)[0];
@@ -22,27 +49,11 @@ class Heap : public std::vector<T> {
 		void pop() {
 			(*this)[0] = (*this)[this->size()-1];
 			this->pop_back();
-			int p=0,l=1,r=2,g;
-			T aux;
-			if(l<this->size()&&(*this)[p]<(*this)[l])
-				g = l;
-			else
-				g = p;
-			if(r<this->size()&&(*this)[g]<(*this)[r])
-				g = r;
-			while(g!=p) {
-				aux = (*this)[p];
-				(*this)[p] = (*this)[g];
-				(*this)[g] = aux;
-				p = g;
-				l = 2*g + 1;
-				r = 2*g + 2;
-				if(l<this->size()&&(*this)[p]<(*this)[l])
-					g = l;
-				else
-					g = p;
-				if(r<this->size()&&(*this)[g]<(*this)[r])
-					g = r;
-			}
+			heapify(0);
+		}
+
+		void makeHeap() {
+			for(int i=this->size()/2-1;i>=0;--i)
+				heapify(i);
 		}
 };
